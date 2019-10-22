@@ -36,9 +36,9 @@ void printBuf(void)
 	for (int i = 0; i < Buffer_Size; i++)
 	{
 		if (i < in && i >= out || i <= in && in <= out && Counter>0 || i >= out && in <= out && Counter > 0)
-			cout << ShareBuf[i] << '\t';
+			cout << ShareBuf[i] << ' ';
 		else
-			cout << "****" << '\t';
+			cout << "**" << ' ';
 	}
 	cout << endl;
 }
