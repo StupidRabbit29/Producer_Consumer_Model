@@ -10,18 +10,18 @@ unsigned __stdcall ProProc(void* pArguments)
 {
 	while (true)
 	{
-		//WaitForSingleObject(Mutex, INFINITE);
+		WaitForSingleObject(Mutex, INFINITE);
 
-		while (Counter == Buffer_Size)
-			;
-
-		ShareBuf[in] = rand() % 1000;
-		cout << "生产者" << *(int*)pArguments << "置入数字：" << ShareBuf[in] << endl;
-		in = (in + 1) % Buffer_Size;
-		Counter++;
-		printBuf();
-
-		//ReleaseMutex(Mutex);
+		if (Counter != Buffer_Size)
+		{
+			ShareBuf[in] = rand() % 1000;
+			cout << "生产者" << *(int*)pArguments << "置入数字：" << ShareBuf[in] << endl;
+			in = (in + 1) % Buffer_Size;
+			Counter++;
+			printBuf();
+		}
+		
+		ReleaseMutex(Mutex);
 		Sleep(rand() % 25);
 	}
 

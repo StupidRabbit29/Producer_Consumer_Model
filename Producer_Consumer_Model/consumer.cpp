@@ -10,18 +10,17 @@ unsigned __stdcall ConProc(void* pArguments)
 {
 	while (true)
 	{
-		//WaitForSingleObject(Mutex, INFINITE);
+		WaitForSingleObject(Mutex, INFINITE);
 
-		int wait = 0;
-		while (Counter == 0)
-			;
+		if (Counter != 0)
+		{
+			cout << "消费者" << *(int*)pArguments << "取出数字：" << ShareBuf[out] << endl;
+			out = (out + 1) % Buffer_Size;
+			Counter--;
+			printBuf();
+		}
 
-		cout << "消费者" << *(int*)pArguments << "取出数字：" << ShareBuf[out] << endl;
-		out = (out + 1) % Buffer_Size;
-		Counter--;
-		printBuf();
-
-		//ReleaseMutex(Mutex);
+		ReleaseMutex(Mutex);
 		Sleep(rand() % 50);
 	}
 
