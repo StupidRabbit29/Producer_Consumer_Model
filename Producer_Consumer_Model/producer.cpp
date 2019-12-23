@@ -10,8 +10,10 @@ unsigned __stdcall ProProc(void* pArguments)
 {
 	while (true)
 	{
+		//申请互斥锁
 		WaitForSingleObject(Mutex, INFINITE);
 
+		//对缓存区内数据进行操作
 		if (Counter != Buffer_Size)
 		{
 			ShareBuf[in] = rand() % 1000;
@@ -20,11 +22,13 @@ unsigned __stdcall ProProc(void* pArguments)
 			Counter++;
 			printBuf();
 		}
-		
+
+		//释放互斥锁
 		ReleaseMutex(Mutex);
 		Sleep(rand() % 25);
 	}
 
+	//退出线程
 	_endthreadex(0);
 	return 0;
 }

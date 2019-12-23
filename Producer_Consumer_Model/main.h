@@ -5,8 +5,8 @@
 #include <process.h>
 using namespace std;
 
-#define Consumer_Number 2
-#define Producer_Number 1
+//#define Consumer_Number 3
+//#define Producer_Number 4
 
 #define Buffer_Size 20
 
